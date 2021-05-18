@@ -1,28 +1,59 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <b-container id="App">
+    <Header></Header>
+   
+
+    <router-view />
+
+    <footer class="page-footer font-small blue">
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">
+        © 2020 Copyright:
+        <a href="https://www.linkedin.com/in/rodrigo-rocha-4a1179165/">
+          Rodrigo Rocha</a
+        >
+      </div>
+      <!-- Copyright -->
+    </footer>
+  </b-container>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import { mapGetters, mapActions } from "vuex";
+
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+import Header from "./components/Header";
 
 export default {
-  name: 'App',
+  name: "App",
+
+  
   components: {
-    HelloWorld
-  }
-}
+    Header,
+  },
+  data(){
+    return{
+        resultado: ""
+    }
+  },
+computed: mapGetters(["allDeputados"]),
+
+  methods:{
+     ...mapActions(["getDeputados"]),
+
+  },
+   created() {
+    this.getDeputados();
+  },
+
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+body{
+background-color: rgb(240, 240, 240);
 }
 </style>
